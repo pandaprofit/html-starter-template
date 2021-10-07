@@ -10,7 +10,7 @@
   flex-direction: column;
   overflow-y: auto;
 
-  background-color: rgba($color-default-black, 0.6);
+  background-color: rgba($black, 0.6);
   transform: scale(1.2);
   visibility: hidden;
   opacity: 0;
@@ -60,7 +60,7 @@
     width: 600px;
     padding: 40px;
 
-    background-color: $color-default-white;
+    background-color: $white;
 
     @include viewport--sm {
       width: 100%;
