@@ -37,7 +37,12 @@ const html = () => {
 
 const css = () => {
   return gulp.src('source/sass/style.scss')
-      .pipe(plumber())
+    .pipe(plumber({
+      errorHandler: function (err) {
+        console.log(err.message);
+        this.emit('end');
+      }
+  }))
       .pipe(sourcemap.init())
       .pipe(sass())
       .pipe(postcss([autoprefixer({
