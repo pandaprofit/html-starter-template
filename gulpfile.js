@@ -87,10 +87,13 @@ const sprite = () => {
 const syncserver = () => {
   server.init({
     server: 'build/',
+    index: 'sitemap.html',
     notify: false,
     open: true,
     cors: true,
     ui: false,
+    // ghostMode: { clicks: false },
+		// tunnel: 'yousutename', // Attempt to use the URL https://yousutename.loca.lt
   });
 
   gulp.watch('source/html/**/*.html', gulp.series(html, refresh));
@@ -140,10 +143,6 @@ const clean = () => {
   return del('build');
 };
 
-const build = gulp.series(clean, svgo, copy, css, sprite, js, html);
-
-const start = gulp.series(build, syncserver);
-
 // Optional tasks
 //---------------------------------
 
@@ -168,6 +167,10 @@ const optimizeImages = () => {
       ]))
       .pipe(gulp.dest('build/img'));
 };
+
+const start = gulp.series(clean, svgo, copy, css, sprite, js, html, syncserver);
+
+const build = gulp.series(clean, svgo, copy, css, sprite, js, html, optimizeImages);
 
 exports.build = build;
 exports.start = start;
